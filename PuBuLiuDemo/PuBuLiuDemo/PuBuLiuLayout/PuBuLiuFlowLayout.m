@@ -51,8 +51,9 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         
 #warning ---随机的高度
+#pragma mark--↓----↓----↓--高度--↓----↓----↓--
         CGFloat itemHeight = arc4random_uniform(80)+200;
-        
+#pragma mark--↑----↑----↑--高度--↑----↑----↑--
         
         CGRect frame = CGRectMake(x, y, itemWidth, itemHeight);
         
