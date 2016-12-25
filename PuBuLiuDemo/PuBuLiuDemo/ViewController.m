@@ -7,8 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "PuBuLiuFlowLayout.h"
+#import "CollectionViewCell.h"
+#import "ToController.h"
 
-@interface ViewController ()
+
+#define LPCRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define LPCRandColor LPCRGBColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+
+@interface ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
 
@@ -16,14 +23,56 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    PuBuLiuFlowLayout *PBLLayout = [[PuBuLiuFlowLayout alloc] init];
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:PBLLayout];
+    
+    collectionView.backgroundColor = [UIColor whiteColor];
+    
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
+    
+    [collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    
+    [self.view addSubview:collectionView];
+}
+
+#pragma mark-->UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    cell.backgroundColor = LPCRandColor;
+    
+    return cell;
+    
+}
+
+#pragma mark-->UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ToController *toVC = [[ToController alloc] init];
+    
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    toVC.color = cell.backgroundColor;
+    
+    [self.navigationController pushViewController:toVC animated:YES];
+    
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 @end
