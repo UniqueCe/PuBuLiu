@@ -10,5 +10,13 @@
 
 @interface PuBuLiuFlowLayout : UICollectionViewFlowLayout
 
+//间隔
+@property (nonatomic, assign) CGFloat space;
+
+//边距
+@property (nonatomic, assign) UIEdgeInsets MarginEdgeInsets;
+
+//列数
+@property (nonatomic, assign) NSInteger columnNumber;
 
 @end

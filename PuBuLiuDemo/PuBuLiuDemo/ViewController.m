@@ -26,6 +26,11 @@
     
     PuBuLiuFlowLayout *PBLLayout = [[PuBuLiuFlowLayout alloc] init];
     
+    PBLLayout.space = 20;
+    PBLLayout.MarginEdgeInsets = UIEdgeInsetsMake(20, 20, 20, 20);
+    PBLLayout.columnNumber = 2;
+
+    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:PBLLayout];
     
     collectionView.backgroundColor = [UIColor whiteColor];
